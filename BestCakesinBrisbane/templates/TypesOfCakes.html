@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<style>
+  .w3-allerta {
+    font-family: "Allerta Stencil", Sans-serif;
+  }
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Allerta+Stencil">
+<section>
+
+  <div class="text-dark text-center">
+    <div>
+      <div class="w3-container w3-lobster">
+        <p class="w3-xxlarge font-effect-shadow-multiple">Whether you’re treating yourself or a loved one, we’ve got
+          something for you.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-columns">
+    <!-- each type is a bootstrap card -->
+    {% for cake in cakes%}
+    <div class="card">
+      <img class="card-img-top" src="{{url_for('static', filename='img/'+cake.image)}}" alt="Card image" height="450">
+      <div class="card-body">
+        <h4 class="card-title">{{cake.name}}</h4>
+        <p class="card-text">{{cake.description}}</p>        
+      </div>
+      <div class="card-footer">
+        <form action="{{ url_for('main.order') }}">
+          <input type="hidden" id="cake_id" name="cake_id" value="{{ cake.id }}">
+          <input class="btn btn-success" type="submit" value="Add to Basket">
+        </form>
+      </div>
+    </div>
+    {% endfor %}
+
+    <body>
+      <div class="w3-container w3-black w3-left w3-allerta">
+        <p class="w3-xxlarge">Restaurant Pairing</p>
+      </div>
+      <div class="w3-container">       
+        <div class="w3-card-4" style="width:70%">
+          <header class="w3-container w3-light-grey">
+            <h3>Marco Pierre White</h3>
+          </header>
+          <div class="w3-container">
+            <p>1 new friend suggestion</p>
+            <hr>
+            <img src="{{url_for('static', filename='img/Marco Pierre White.JPG')}}" alt="Profile Photo"
+              class="w3-center w3-circle w3-margin-right" style="width:60px" height="60">
+            <br>
+            <p>Founder at EatClub. A lifeline passion for food and restaurant culture. Founder of Melbourne food tech
+              startup aimed at helping restaurants 'fight back' against the big delivery companies by enticing diners
+              back into restaurants. </p><br>
+          </div>
+          <button type="button" class="w3-button w3-block w3-purple" id="redirectButton">+ Connect with Marco</button>          
+          <img class="center" src="{{url_for('static', filename='img/insta_QR1.png')}}" alt="QR Code"
+             style="width:90px" height="90">
+        </div>        
+      </div>
+      <script src="../static/script1.js"></script>
+    </body>
+  </div>
+
+
+
+
+</section>
+{% endblock %}

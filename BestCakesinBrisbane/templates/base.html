@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <meta charset="utf-8">
+  <meta name="description" content="Best Cakes in Brisbane">
+
+<body>
+
+  <!-- Bootstrap Required Meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <title>Best Cakes in Brisbane</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster&effect=shadow-multiple">
+  <style>
+    .w3-lobster {
+      font-family: "Lobster", Sans-serif;
+    }
+  </style>
+
+
+  </head>
+
+  <body>
+
+    <!-- Contains the heading, navigation and banner image -->
+    <header>
+
+      <ul class="nav nav-pills">
+        <div class="nav-item">
+          <a class="nav-link active" href="{{ url_for('main.index') }}">
+            <img src="{{url_for('static', filename='img/icons8-venn-diagram-100.png')}}" width="22" height="22"
+              class="d-inline-block align-top" alt="My Logo">
+            Brisbane Best Cakes
+          </a>
+        </div>
+        <div class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false">Our
+            Cakes</a>
+          <div class="dropdown-menu">
+            {% for type in types%}
+            <a class="dropdown-item" href="{{ url_for('main.TypesofCakes', typeid=type.id) }}">{{type.name}}</a>
+            {% endfor %}
+            <div class="dropdown-divider"></div>
+
+          </div>
+        </div>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.Checkout', _anchor='contact_anchor') }}">Contact Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('main.order', _anchor='shopping_anchor') }}">Shopping Cart</a>
+
+        </li>
+        <div class="search-container">
+          <!-- search box -->
+          <form class="form-inline my-2 my-lg-0 ml-5" action="{{url_for('main.search')}}" style="margin:right">
+            <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search">
+            <button class="btn btn-outline-black btn btn-secondary btn-s my-0 ml-1" type="submit">Search</button>
+          </form>
+
+        </div>
+
+      </ul>
+      {% with messages = get_flashed_messages() %}
+      {% if messages %}
+      <div class="alert alert-primary" role="alert">
+        {% for message in messages %}
+        {{ message }}
+        {% endfor %}
+      </div>
+      {% endif %}
+      {% endwith %}
+
+      <div class="w3-container">
+        <a href="index.html"></a>
+      </div>
+      {% block head %}{% endblock %}
+    </header>
+
+
+    <div class="container-fluid">
+      <main>
+        {% block main %}{% endblock %}
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div class="w3-container w3-blue">
+        <br />
+        <h5>Best Cake In Brisbane</h5>
+        <p><i><i>Find the perfect cake for the one you love!</i></p>
+      </div>
+      <div class="w3-container w3-blue">
+        <span class="text-light">Copyright &copy; 2022</span>
+      </div>
+    </footer>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"></script>
+
+  </body>
+
+</html>

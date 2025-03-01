@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<style>
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 10px;
+    background-color: #bde0df;
+    padding: 10px;
+  }
+
+  .grid-container>div {
+    background-color: rgb(249, 243, 243);
+    text-align: center;
+    padding: 20px 100;
+    font-size: 20px;
+  }
+</style>
+
+
+<!--Jumbotron for Hero Section -->
+<div class="jumbotron jumbotron-fluid card card-image"
+  style="background-image: url({{url_for('static', filename='img/header.jpg')}});">
+  <div class="row justify-content-center mt-5 pb-4">
+    <div class="col-md-8">
+
+      <div class="jumbotron shadow py-4 mb-5 ">
+        <h1 class="text-center">Where do you find the Best Cake's in Brisbane?</h1>
+        <form method="get" class="form-inline d-flex flex-nowrap">
+          <select class="form-control flex-grow-1 my-1 mr-sm-2" id="website">
+
+
+            <option selected>What type of cake would you like to know more about ...</option>
+            <option value="cheesecakes">Cheesecake</option>
+            <option value="chocolate">Chocolate Cake</option>
+            <option value="party">Party Cake</option>
+            <option value="rainbow">Rainbow Cake</option>
+
+
+          </select>
+
+        </form>
+        <button type="submit" class="flex-shrink-1 btn btn-success my-1" id="button">Submit</button>
+
+        <script src="../static/script.js"></script>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block main %}
+
+<!-- Contains the main content of the website, divided into sections -->
+<main>
+
+
+
+  <section>
+    <div class="text-dark text-center" id="types_anchor">
+      <div>
+        <div class="w3-container w3-lobster">
+          <p class="w3-xxxlarge font-effect-shadow-multiple">Choose your cake from a variety!</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-deck">
+      {% for type in types%}
+      <div class="card">
+        <img class="card-img-top" src="{{url_for('static', filename='img/'+type.image)}}" alt="Card image"
+          height="auto">
+        <div class="card-body">
+          <h4 class="card-title">{{type.name}}</h4>
+          <p class="card-text">{{type.description}}</p>
+        </div>
+        <div class="card-footer"><a href="{{ url_for('main.TypesofCakes', typeid=type.id) }}"
+            class="btn btn-success">More details</a></div>
+      </div>
+      {% endfor %}
+
+    </div>
+    <p></p>
+    <p></p>
+
+    <body>
+      <div class="text-dark text-center">
+        <div>
+          <div class="w3-container w3-lobster">
+            <p class="w3-xxxlarge font-effect-shadow-multiple">All the cakes in our store</p>
+            <p class="w3-xlarge font-effect-shadow-multiple">What's your favourite flavour?</p>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="grid-container">
+
+        {% for cake in cakes%}
+        <div class="w3-card" style="width:250px">
+          <a target="_blank" href=" ">
+            <img src=" {{url_for('static', filename='img/' +cake.image)}}" style="width:100%" height="200">
+          </a>
+          <div class="w3-container w3-center">
+            <p class="w3-xlarge">{{cake.name}}</p>
+            <p>$ 30</p>
+            <form action="{{ url_for('main.order') }}">
+              <input type="hidden" id="cake_id" name="cake_id" value="{{ cake.id }}">
+              <input class="btn btn-success" type="submit" value="Add to Basket">
+            </form>
+            <br />
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </body>
+
+
+
+
+
+
+
+
+    </div>
+  </section>
+
+
+
+
+</main>
+
+{% endblock %}
