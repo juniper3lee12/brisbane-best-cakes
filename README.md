@@ -2,6 +2,9 @@
 
 This is an online cake shop website. We created this website to sell a variety of cakes. Customers can choose different types of cakes, add them to the basket, and all orders will be stored in the database.
 
+# See how it works
+https://brisbane-best-cakes-b8f4135899cb.herokuapp.com/
+
 # Features
 
 - **Cake Selection**: Customers can browse and select from a range of cakes.
